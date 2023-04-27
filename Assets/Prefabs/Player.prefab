@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2259333809139706969}
   - component: {fileID: 2259333809139706950}
   - component: {fileID: 2259333809139706948}
-  - component: {fileID: 2259333809139706951}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -66,27 +65,13 @@ Rigidbody:
   m_GameObject: {fileID: 2259333809139706968}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.4
-  m_AngularDrag: 0.4
+  m_Drag: 0.3
+  m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!64 &2259333809139706951
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2259333809139706968}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &2259333809465288863
 GameObject:
   m_ObjectHideFlags: 0
