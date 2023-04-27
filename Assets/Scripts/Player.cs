@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 
     public static Player Instance { get; private set; }
 
-    [SerializeField] private float linearMagnitude = 3f;
-    [SerializeField] private float angularMagnitude = 2f;
+    [SerializeField] private float linearMagnitude = 8f;
+    [SerializeField] private float angularMagnitude = 4f;
     [SerializeField] private InputManager inputManager;
     
     private Rigidbody playerRigidbody;
@@ -37,10 +37,20 @@ public class Player : MonoBehaviour {
             playerRigidbody.AddTorque(new Vector3(0, angularForce, 0));        
         }
 
-        Debug.Log("Linear: " + playerRigidbody.velocity.magnitude + ", Angular: " + playerRigidbody.angularVelocity.magnitude);
+        // Debug.Log("Linear: " + playerRigidbody.velocity.magnitude + ", Angular: " + playerRigidbody.angularVelocity.magnitude);
     }
 
-    // public static float GetVelocity() {
-    //     return new Vector3();
-    // }
+    private void OnCollisionEnter(Collision other) {
+        if (other.transform.TryGetComponent(out Obstacle obstacle)) {
+            Debug.Log("Destroy Obstacle");
+            Destroy(obstacle.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.transform.TryGetComponent(out PowerUp powerUp)) {
+            Debug.Log("Destroy PowerUp");
+            Destroy(powerUp.gameObject);
+        }
+    }
 }

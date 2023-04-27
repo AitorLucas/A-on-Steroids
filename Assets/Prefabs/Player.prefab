@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd6ede4afe115e4f8e8e16d03ff092e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearMagnitude: 3
-  angularMagnitude: 1
+  linearMagnitude: 10
+  angularMagnitude: 5
   inputManager: {fileID: 0}
-  maxLinearSpeed: 10
-  maxAngularSpeed: 4
+  maxLinearSpeed: 12
+  maxAngularSpeed: 6
 --- !u!54 &2259333809139706948
 Rigidbody:
   m_ObjectHideFlags: 0
