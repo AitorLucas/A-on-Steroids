@@ -4,7 +4,9 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class PowerUpSO : ScriptableObject {
+
     public Transform prefab;
     public string powerUpName;
+    
 }
 

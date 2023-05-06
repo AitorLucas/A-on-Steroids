@@ -5,8 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
-        if (other.transform.TryGetComponent(out ObstacleVisual obstacle)) {
-            Destroy(obstacle.gameObject);
+        if (other.transform.TryGetComponent(out Obstacle obstacle)) {
+            Destroy(gameObject);
         }
     }
 }

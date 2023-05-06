@@ -84,15 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd6ede4afe115e4f8e8e16d03ff092e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearMagnitude: 20
-  angularMagnitude: 10
-  maxLinearSpeed: 10
-  maxAngularSpeed: 5
-  fireDelay: 0.1
   inputManager: {fileID: 0}
   spawnPoint: {fileID: 4298064808622629567}
   projectileObject: {fileID: 7506107511779688435, guid: c24ff3337265a8b4ea3feb70fafb2c6e,
     type: 3}
+  dragMagnitude: 2
 --- !u!54 &2259333809139706948
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,7 +196,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333809465288863}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -297,7 +293,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333809623838719}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
@@ -395,7 +391,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333809699996369}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
@@ -493,7 +489,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333809802249968}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -590,7 +586,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333809844206558}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
@@ -688,7 +684,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259333810923102982}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 359008f6dcd6c964d95ddeb8be981d1c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

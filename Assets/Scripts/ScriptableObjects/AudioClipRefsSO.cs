@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class AudioClipRefsSO : ScriptableObject {
-        
+    
     public AudioClip[] shot;
     public AudioClip[] background;
     

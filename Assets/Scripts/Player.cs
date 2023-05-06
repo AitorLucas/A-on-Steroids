@@ -7,17 +7,22 @@ public class Player : MonoBehaviour {
 
     public static Player Instance { get; private set; }
 
-    [SerializeField] private float linearMagnitude = 16f;
-    [SerializeField] private float angularMagnitude = 8f;
-    [SerializeField] private float maxLinearSpeed = 10f;
-    [SerializeField] private float maxAngularSpeed = 5f;
-    [SerializeField] private float fireDelay = 0.1f;
-
     [SerializeField] private InputManager inputManager;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Projectile projectileObject;
 
-    private float fireTimer;
+    private float linearMagnitude = 16f;
+    private float angularMagnitude = 8f;
+    private float maxLinearSpeed = 10f;
+    private float maxAngularSpeed = 5f;
+    [SerializeField] private float dragMagnitude = 2f;
+
+    private float nextFireTime; 
+    private float fireRate = 0.15f;
+    private float burstDelay = 0.1f;
+    private int burstCount = 3;
+    private bool canFire = true;
+
     private Rigidbody playerRigidbody;
 
     public event EventHandler OnShootFired;
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour {
 
     private void Update() {
         HandleMovement();
+        HandleFireShot();
     }
 
     private void HandleMovement() {
@@ -45,24 +51,45 @@ public class Player : MonoBehaviour {
             playerRigidbody.AddTorque(new Vector3(0, angularForce, 0));        
         }
 
-        if (Input.GetKey(KeyCode.Space)) {
-            if (Time.time >= fireTimer + fireDelay) {
-                Projectile projectile = Instantiate<Projectile>(projectileObject, spawnPoint);
-                // projectile.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;    
+        AddDrag();
+    }
 
-                float shotMagnitude = 30;
-                projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * shotMagnitude, ForceMode.Impulse);
-                
-                fireTimer = Time.time;
+    private void AddDrag() {
+        Vector3 direction = -playerRigidbody.velocity.normalized;
+        float velocity = playerRigidbody.velocity.magnitude;
 
-                OnShootFired?.Invoke(this, EventArgs.Empty);
+        playerRigidbody.AddForce(direction * velocity * dragMagnitude * Time.deltaTime);
+    }
+
+    private void HandleFireShot() {
+        if (Input.GetKeyDown(KeyCode.Space) && canFire && Time.time >= nextFireTime) {
+            nextFireTime = Time.time + fireRate;
+            StartCoroutine(FireBurst());
+        }
+    }
+
+    IEnumerator FireBurst() {
+        canFire = false;
+        for (int i = 0; i < burstCount; i++) {
+            Projectile projectile = Instantiate<Projectile>(projectileObject, spawnPoint);
+            Destroy(projectile, 3);
+
+            float shotMagnitude = 30;
+            projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * shotMagnitude, ForceMode.Impulse);
+
+            OnShootFired?.Invoke(this, EventArgs.Empty);
+
+            if (i < burstCount - 1) {
+                yield return new WaitForSeconds(burstDelay);
             }
         }
+        yield return new WaitForSeconds(fireRate - (burstCount - 1) * burstDelay);
+        canFire = true;
     }
 
     private void OnCollisionEnter(Collision other) {
         if (other.transform.TryGetComponent(out Obstacle obstacle)) {
-            // DIMINUIR VIDA DO PLAYER
+            // TODO: - DIMINUIR VIDA DO PLAYER
 
 
             // Debug.Log("Destroy Obstacle");
@@ -74,7 +101,7 @@ public class Player : MonoBehaviour {
         if (other.transform.TryGetComponent(out PowerUpVisual powerUp)) {
             Destroy(powerUp.gameObject);
 
-            // APLICAR EFEITO DO POWER UP
+            // TODO: - APLICAR EFEITO DO POWER UP
         }
     }
 }

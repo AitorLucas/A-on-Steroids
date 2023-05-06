@@ -4,6 +4,10 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class ObstacleSO : ScriptableObject {
-    public Transform prefab;
+
+    public Obstacle obstacle;
     public string obstacleName;
+    public float baseScale;
+    public float baseLife;
+
 }
