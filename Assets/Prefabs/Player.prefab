@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &610231485492714898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4298064808622629567}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4298064808622629567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610231485492714898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2259333809139706969}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2259333809139706968
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +67,7 @@ Transform:
   - {fileID: 2259333809465288860}
   - {fileID: 2259333809844206559}
   - {fileID: 2259333809699996382}
+  - {fileID: 4298064808622629567}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,11 +83,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd6ede4afe115e4f8e8e16d03ff092e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linearMagnitude: 10
-  angularMagnitude: 5
-  inputManager: {fileID: 0}
+  linearMagnitude: 16
+  angularMagnitude: 8
   maxLinearSpeed: 12
-  maxAngularSpeed: 6
+  maxAngularSpeed: 10
+  fireDelay: 0.1
+  inputManager: {fileID: 0}
+  spawnPoint: {fileID: 4298064808622629567}
+  projectileObject: {fileID: 7506107511779688435, guid: c24ff3337265a8b4ea3feb70fafb2c6e,
+    type: 3}
 --- !u!54 &2259333809139706948
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70,7 +106,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!1 &2259333809465288863
 GameObject:

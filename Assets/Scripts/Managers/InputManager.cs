@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour {
     }
 
     public Vector2 GetMovementVectorNormalized() {
-        Vector2 inputVector =  gameInputActions.Player.Movement.ReadValue<Vector2>();
+        Vector2 inputVector = gameInputActions.Player.Movement.ReadValue<Vector2>();
         return inputVector.normalized;
     }
 }

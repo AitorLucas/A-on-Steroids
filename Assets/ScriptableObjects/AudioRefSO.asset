@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5e5801441315643bcb17c44f6d2211, type: 3}
+  m_Name: AudioRefSO
+  m_EditorClassIdentifier: 
+  shot:
+  - {fileID: 8300000, guid: 9000182728ec3d248a1b2899c8b59d2a, type: 3}
+  background:
+  - {fileID: 8300000, guid: 7d2772b58c43a1b48825e949567fb9f6, type: 3}

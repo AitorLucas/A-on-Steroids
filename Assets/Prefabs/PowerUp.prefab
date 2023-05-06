@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1918674502193841096}
   - component: {fileID: 3953294550051079794}
   - component: {fileID: 4212035981258370989}
+  - component: {fileID: 5569011133849196242}
+  - component: {fileID: 3315171354196223880}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -83,6 +85,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &5569011133849196242
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406131540408476273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3315171354196223880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406131540408476273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa827d7732b1d749b4389472516126c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUp: {fileID: 3119805469834027248}
 --- !u!1 &7713007961201691363
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +121,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7271818620112767553}
   - component: {fileID: 3119805469834027248}
-  - component: {fileID: 1023974227880644163}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -129,16 +156,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189be6be17f3ccf4a8cd3a51e2e65fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &1023974227880644163
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713007961201691363}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
