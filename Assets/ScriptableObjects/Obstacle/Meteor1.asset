@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62b8be97d75228943929c7e6d5768ce7, type: 3}
-  m_Name: Meteor2
+  m_Name: Meteor1
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 1549278644281416968, guid: 3ddfa8907afd29541aca7efb53ed6073,
+  obstacle: {fileID: 1549278644281416968, guid: 8aabb05bca0a52941b9f0ee720a811d4,
     type: 3}
   obstacleName: Meteor 1
-  baseScale: 10
-  baseLife: 150
+  baseScale: 100
+  baseLife: 1

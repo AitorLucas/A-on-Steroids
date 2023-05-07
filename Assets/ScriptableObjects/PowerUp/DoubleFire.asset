@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f90c4b1479dde54191b624c9f71388c, type: 3}
+  m_Name: DoubleFire
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1822728700227865069, guid: 12c822d149e9fc147a6b2b602c8c26d3, type: 3}
+  powerUpName: Double Fire
+  powerUpType: 2

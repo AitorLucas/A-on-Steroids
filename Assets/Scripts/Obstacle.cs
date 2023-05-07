@@ -8,9 +8,13 @@ public class Obstacle : MonoBehaviour {
     [SerializeField] private ObstacleVisual obstacleVisual;
     [SerializeField] private ObstacleVisual obstacleOuterVisual;
 
-    public event EventHandler OnObstacleDestroy;
+    public event EventHandler<OnObstacleDestroyArgs> OnObstacleDestroy;
+    public class OnObstacleDestroyArgs : EventArgs {
+        public float life;
+    }
 
     private float life;
+    private float currentLife;
 
     private float forceMagnitude;
     private float torqueMagnitude;
@@ -22,15 +26,19 @@ public class Obstacle : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.transform.TryGetComponent(out Projectile projectile)) {
-            float damage = 30f;
+            float damage = 20f;
             AddDamage(damage);
         }
-    }   
+    }
+
+    public void InstantKill() {
+        AddDamage(life);
+    }
 
     private void AddDamage(float damage) {
-        life -= damage;
-        if (life <= 0) {
-            OnObstacleDestroy?.Invoke(this, EventArgs.Empty);
+        currentLife -= damage;
+        if (currentLife <= 0) {
+            OnObstacleDestroy?.Invoke(this, new OnObstacleDestroyArgs { life = this.life });
         } else {
             StartCoroutine(InitiateOuterEffect());
         }
@@ -46,6 +54,7 @@ public class Obstacle : MonoBehaviour {
 
     public void DefineInitialLife(float life) {
         this.life = life;
+        this.currentLife = life;
     }
 
     public void DestroySelf() {

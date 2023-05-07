@@ -4,28 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-
+    // - Singleton
     public static Player Instance { get; private set; }
-
+    // - SerializeField
     [SerializeField] private InputManager inputManager;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform rightSpawnPoint;
+    [SerializeField] private Transform leftSpawnPoint;
+    [SerializeField] private Transform rightPUSpawnPoint;
+    [SerializeField] private Transform leftPUSpawnPoint;
     [SerializeField] private Projectile projectileObject;
-
-    private float linearMagnitude = 16f;
-    private float angularMagnitude = 8f;
+    // - Events
+    public event EventHandler OnPlayerCrash;
+    public event EventHandler OnShootFired;
+    // - Movement
+    private float linearMagnitude = 20f;
+    private float angularMagnitude = 3f;
     private float maxLinearSpeed = 10f;
-    private float maxAngularSpeed = 5f;
+    private float maxAngularSpeed = 3f;
     [SerializeField] private float dragMagnitude = 2f;
-
+    // - Shot
     private float nextFireTime; 
-    private float fireRate = 0.15f;
+    private float fireRate = 0.6f;
     private float burstDelay = 0.1f;
     private int burstCount = 3;
     private bool canFire = true;
+    // - PowerUp
+    private bool isPowerUpActive = false;
+    private PowerUpType powerUpType;
+    private float powerUpTimer;
 
     private Rigidbody playerRigidbody;
-
-    public event EventHandler OnShootFired;
 
     private void Awake() {
         Instance = this;
@@ -36,6 +44,7 @@ public class Player : MonoBehaviour {
     private void Update() {
         HandleMovement();
         HandleFireShot();
+        HandlePowerUp();
     }
 
     private void HandleMovement() {
@@ -71,11 +80,13 @@ public class Player : MonoBehaviour {
     IEnumerator FireBurst() {
         canFire = false;
         for (int i = 0; i < burstCount; i++) {
-            Projectile projectile = Instantiate<Projectile>(projectileObject, spawnPoint);
-            Destroy(projectile, 3);
+            ShotProjectile(leftSpawnPoint);
+            ShotProjectile(rightSpawnPoint);
 
-            float shotMagnitude = 30;
-            projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * shotMagnitude, ForceMode.Impulse);
+            if (isPowerUpActive && powerUpType == PowerUpType.DoubleFire) {
+                ShotProjectile(leftPUSpawnPoint);
+                ShotProjectile(rightPUSpawnPoint);
+            }
 
             OnShootFired?.Invoke(this, EventArgs.Empty);
 
@@ -87,21 +98,48 @@ public class Player : MonoBehaviour {
         canFire = true;
     }
 
+    private void ShotProjectile(Transform spawnTransform) {
+        Projectile projectile = Instantiate<Projectile>(projectileObject, spawnTransform);
+        Destroy(projectile, 3);
+
+        float shotMagnitude = 30;
+        projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * shotMagnitude, ForceMode.Impulse);
+    }
+
+    private void HandlePowerUp() {
+        if (isPowerUpActive) {
+            powerUpTimer -= Time.deltaTime;
+
+            if (powerUpTimer <= 0) {
+                isPowerUpActive = false;
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision other) {
         if (other.transform.TryGetComponent(out Obstacle obstacle)) {
-            // TODO: - DIMINUIR VIDA DO PLAYER
+            OnPlayerCrash?.Invoke(this, EventArgs.Empty);
 
+            if (isPowerUpActive) {
+                if (powerUpType == PowerUpType.Invincibility) {
+                    obstacle.InstantKill();
+                }
+                if (powerUpType == PowerUpType.Shield) {
+                    powerUpTimer = 0.3f;
+                }
+            }
 
-            // Debug.Log("Destroy Obstacle");
-            // Destroy(obstacle.gameObject);
+            // Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.transform.TryGetComponent(out PowerUpVisual powerUp)) {
-            Destroy(powerUp.gameObject);
+        if (other.transform.TryGetComponent(out PowerUp powerUp)) {
+            isPowerUpActive = true;
+            powerUpType = powerUp.GetPowerUpType();
+            powerUpTimer = 10;
 
-            // TODO: - APLICAR EFEITO DO POWER UP
+            Destroy(powerUp.gameObject);
         }
     }
 }
