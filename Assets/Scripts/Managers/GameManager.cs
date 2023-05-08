@@ -16,10 +16,11 @@ public class GameManager : MonoBehaviour {
     }
 
     private List<Obstacle> obstacleSpawnedList = new List<Obstacle>();
+    private PowerUp powerUpSpawned = null;
 
     private int score = 0;
-    private float minRenderDistance = 20f;
-    private float maxRenderDistance = 60f;
+    private float minRenderDistance = 25f;
+    private float maxRenderDistance = 50f;
     private int maxObstacleSpawned = 100;
 
     private void Awake() {
@@ -28,29 +29,40 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         Vector3 playerPosition = Player.Instance.transform.position;
-        SpawnObstacles(); 
+        SpawnObstacles();
 
         for (int index = 0; index < GetObstacleSpawned(); index ++) {
             Obstacle obstacle = obstacleSpawnedList[index];
             
-            // obstacle.ApplyTranslation();
-            // obstacle.ApplyRotation();
+            obstacle.ApplyForce();
+            obstacle.ApplyTorque();
+        }
+
+        for (int index = 0; index < 20; index ++) {
+            SpawnPowerUp();
         }
     }
 
+
+    int i = 0;
     private void Update() {
         RemoveFarObstacles();
+        
+        if (i < 10) {
+            for (int index = 0; index < GetObstacleSpawned(); index ++) {
+                Obstacle obstacle = obstacleSpawnedList[index];
+                
+                obstacle.ApplyForce();
+                obstacle.ApplyTorque();
+            }
+            i += 1;
+        }
     }
 
     private void SpawnObstacles() {
-        Vector3 playerPosition = Player.Instance.transform.position;
-
         while(GetObstacleSpawned() < maxObstacleSpawned) {
             // - Calc a range around player subtracting a span near it.
-            float radius = UnityEngine.Random.Range(minRenderDistance, maxRenderDistance);
-            float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-
-            Vector3 spawnPosition = playerPosition + new Vector3(Mathf.Cos(angle) * radius, 0.5f, Mathf.Sin(angle) * radius);
+            Vector3 spawnPosition = GetValidPositionToSpawn();
 
             // - Spawn new Obstacle
             ObstacleSO newObstacleSO = obstacleSOArray[UnityEngine.Random.Range(0, obstacleSOArray.Length)];
@@ -59,18 +71,49 @@ public class GameManager : MonoBehaviour {
             // - Modify scale and life
             float scale = newObstacleSO.baseScale * UnityEngine.Random.Range(0.5f, 2f);
             newObstacle.transform.localScale = new Vector3(scale, scale, scale);
-            newObstacle.DefineInitialLife(newObstacleSO.baseLife * scale);
+            newObstacle.DefineLife(newObstacleSO.baseLife * scale);
 
             // - Add movement to Obstacle
             newObstacle.ApplyForce();
             newObstacle.ApplyTorque();
 
-            // - Observe obstacle event
+            // - Observe Obstacle event
             newObstacle.OnObstacleDestroy += Obstacle_OnObstacleDestroy;
 
             // - Add to array to validate distance afterwards
             obstacleSpawnedList.Add(newObstacle);        
         }
+    }
+
+    private void SpawnPowerUp() {
+        // - Calc a range around player subtracting a span near it.
+        Vector3 spawnPosition = GetValidPositionToSpawn();
+
+        // TODO: - ADD A BETTER RANDOMIZER
+
+        // - Spawn new PowerUp
+        PowerUpSO newPowerUpSO = powerUpSOArray[UnityEngine.Random.Range(0, obstacleSOArray.Length)];
+        PowerUp newPowerUp = Instantiate<PowerUp>(newPowerUpSO.powerUp, spawnPosition, Quaternion.identity);
+
+        // - Attribute PowerUp type variant
+        newPowerUp.DefinePowerUpType(newPowerUpSO.powerUpType);
+
+        // - Observe PowerUp event
+        newPowerUp.OnPowerUpDestroy += PowerUp_OnPowerUpDestroy;
+
+        // - Add to variable to validate distance afterwards
+        powerUpSpawned = newPowerUp;
+    }
+
+    private Vector3 GetValidPositionToSpawn() {
+        Vector3 playerPosition = Player.Instance.transform.position;
+
+        float radius = UnityEngine.Random.Range(minRenderDistance, maxRenderDistance);
+        float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+
+        Vector3 spawnPosition = playerPosition + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+        
+        return spawnPosition;
     }
 
     private void RemoveFarObstacles() {
@@ -83,7 +126,7 @@ public class GameManager : MonoBehaviour {
                 obstacleSpawnedList.RemoveAt(index);
                 index -= 1;
 
-                obstacle.DestroySelf();
+                Destroy(obstacle.gameObject);
             }
         }
 
@@ -94,14 +137,21 @@ public class GameManager : MonoBehaviour {
         Obstacle obstacle = sender as Obstacle;
         obstacleSpawnedList.Remove(obstacle);
 
-        obstacle.DestroySelf();
+        Destroy(obstacle.gameObject);
 
-        AddToScore((int)e.life);
+        AddPointsToScore((int)e.life);
 
         SpawnObstacles();
     }
 
-    private void AddToScore(int points) {
+    private void PowerUp_OnPowerUpDestroy(object sender, EventArgs e) {
+        PowerUp powerUp = sender as PowerUp;
+        powerUpSpawned = null;
+
+        Destroy(powerUp.gameObject);
+    }
+
+    private void AddPointsToScore(int points) {
         score += points;
         OnScoreChanged?.Invoke(this, new OnScoreChangedArgs { score = this.score });
     }

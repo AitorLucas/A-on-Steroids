@@ -47,18 +47,14 @@ public class Obstacle : MonoBehaviour {
     private IEnumerator InitiateOuterEffect() {
         obstacleOuterVisual.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         obstacleOuterVisual.gameObject.SetActive(false);
     }
 
-    public void DefineInitialLife(float life) {
+    public void DefineLife(float life) {
         this.life = life;
         this.currentLife = life;
-    }
-
-    public void DestroySelf() {
-        Destroy(gameObject);
     }
 
     public void ApplyForce() {

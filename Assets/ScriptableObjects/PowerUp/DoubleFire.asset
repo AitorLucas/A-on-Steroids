@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f90c4b1479dde54191b624c9f71388c, type: 3}
   m_Name: DoubleFire
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1822728700227865069, guid: 12c822d149e9fc147a6b2b602c8c26d3, type: 3}
+  powerUp: {fileID: 6263051406624580444, guid: 12c822d149e9fc147a6b2b602c8c26d3, type: 3}
   powerUpName: Double Fire
   powerUpType: 2

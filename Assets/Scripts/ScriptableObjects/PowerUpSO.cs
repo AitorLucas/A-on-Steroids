@@ -12,7 +12,7 @@ public enum PowerUpType {
 [CreateAssetMenu()]
 public class PowerUpSO : ScriptableObject {
 
-    public Transform prefab;
+    public PowerUp powerUp;
     public string powerUpName;
     public PowerUpType powerUpType;
 
