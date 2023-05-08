@@ -19,9 +19,11 @@ public class GameManager : MonoBehaviour {
     private PowerUp powerUpSpawned = null;
 
     private int score = 0;
-    private float minRenderDistance = 25f;
+    private float minRenderDistance = 30f;
     private float maxRenderDistance = 50f;
-    private int maxObstacleSpawned = 100;
+    private int maxObstacleSpawned = 60;
+    private float powerUpSpawnInterval = 10f;
+    private float powerUpTime = 0f;
 
     private void Awake() {
         Instance = this;
@@ -38,25 +40,13 @@ public class GameManager : MonoBehaviour {
             obstacle.ApplyTorque();
         }
 
-        for (int index = 0; index < 20; index ++) {
-            SpawnPowerUp();
-        }
+        // - To start game with a PowerUp spawning
+        powerUpTime = powerUpSpawnInterval;
     }
 
-
-    int i = 0;
     private void Update() {
         RemoveFarObstacles();
-        
-        if (i < 10) {
-            for (int index = 0; index < GetObstacleSpawned(); index ++) {
-                Obstacle obstacle = obstacleSpawnedList[index];
-                
-                obstacle.ApplyForce();
-                obstacle.ApplyTorque();
-            }
-            i += 1;
-        }
+        SpawnPowerUp();
     }
 
     private void SpawnObstacles() {
@@ -86,7 +76,12 @@ public class GameManager : MonoBehaviour {
     }
 
     private void SpawnPowerUp() {
-        // - Calc a range around player subtracting a span near it.
+        powerUpTime += Time.deltaTime;
+
+        if (powerUpTime >= powerUpSpawnInterval) {
+            powerUpTime = 0;
+
+             // - Calc a range around player subtracting a span near it.
         Vector3 spawnPosition = GetValidPositionToSpawn();
 
         // TODO: - ADD A BETTER RANDOMIZER
@@ -103,6 +98,7 @@ public class GameManager : MonoBehaviour {
 
         // - Add to variable to validate distance afterwards
         powerUpSpawned = newPowerUp;
+        }
     }
 
     private Vector3 GetValidPositionToSpawn() {

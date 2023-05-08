@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour {
 
-    [SerializeField] private GameObject visual;
-    [SerializeField] private GameObject outerGlow;
-
     public event EventHandler OnPowerUpDestroy;
 
     private PowerUpType powerUpType;

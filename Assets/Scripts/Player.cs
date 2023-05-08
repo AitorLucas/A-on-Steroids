@@ -14,14 +14,17 @@ public class Player : MonoBehaviour {
     [SerializeField] private Transform leftPUSpawnPoint;
     [SerializeField] private Projectile projectileObject;
     [SerializeField] private GameObject shieldObject;
+    [SerializeField] private GameObject outerRainbowObject;
     [SerializeField] private ParticleSystem mainJetParticles;
     [SerializeField] private ParticleSystem leftJetParticles;
     [SerializeField] private ParticleSystem rightJetParticles;
     [SerializeField] private ParticleSystem frontLeftJetParticles;
     [SerializeField] private ParticleSystem frontRightJetParticles;
+    [SerializeField] private ParticleSystem explosionParticles;
     // - Events
     public event EventHandler OnPlayerCrash;
     public event EventHandler OnShootFired;
+    public event EventHandler OnPowerUpCatched;
     public event EventHandler<OnPlayerLifeChangedArgs> OnPlayerLifeChanged;
     public class OnPlayerLifeChangedArgs : EventArgs {
         public float currentLifeNormalized;
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour {
     private float maxLinearSpeed = 14f;
     private float maxAngularSpeed = 2f;
     private float dragMagnitude = 30f;
+    public bool isMoving = false;
     // - Shot
     private float nextFireTime; 
     private float fireRate = 0.6f;
@@ -90,6 +94,8 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.transform.TryGetComponent(out PowerUp powerUp)) {
+            OnPowerUpCatched?.Invoke(this, EventArgs.Empty);
+
             isPowerUpActive = true;
             powerUpType = powerUp.GetPowerUpType();
             powerUpTimer = 10;
@@ -98,6 +104,12 @@ public class Player : MonoBehaviour {
                 ShowShield();
             } else {
                 HideShield();
+            }
+
+            if (powerUpType == PowerUpType.Invincibility) {
+                ShowRainbow();
+            } else {
+                HideRainbow();
             }
 
             if (powerUpType == PowerUpType.Life) {
@@ -118,6 +130,8 @@ public class Player : MonoBehaviour {
 
     private void HandleMovement() {
         Vector2 movement = inputManager.GetMovementVectorNormalized();
+
+        isMoving = (movement != Vector2.zero);
 
         if (playerRigidbody.velocity.magnitude < maxLinearSpeed) {
             float linearForce = linearMagnitude * movement.y;
@@ -231,22 +245,20 @@ public class Player : MonoBehaviour {
             }
         } else {
             HideShield();
+            HideRainbow();
         }
     }
 
     private void AddDamage(float damage) {
         currentLife -= damage;
 
-        Debug.Log("Damage");
-
         OnPlayerLifeChanged?.Invoke(this, new OnPlayerLifeChangedArgs {
             currentLifeNormalized = this.currentLife / this.maxLife
         });
 
-        Debug.Log(currentLife);
-
         if (currentLife <= 0) {
-            // TODO: - Explode ship          
+            explosionParticles.Play();
+
             OnPlayerCrash?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -269,5 +281,13 @@ public class Player : MonoBehaviour {
 
     private void ShowShield() {
         shieldObject.gameObject.SetActive(true);
+    }
+
+    private void HideRainbow() {
+        outerRainbowObject.gameObject.SetActive(false);
+    }
+
+    private void ShowRainbow() {
+        outerRainbowObject.gameObject.SetActive(true);
     }
 }

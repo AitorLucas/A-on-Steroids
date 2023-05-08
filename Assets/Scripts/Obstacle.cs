@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour {
-
-    [SerializeField] private ObstacleVisual obstacleVisual;
     [SerializeField] private ObstacleVisual obstacleOuterVisual;
 
     public event EventHandler<OnObstacleDestroyArgs> OnObstacleDestroy;
@@ -20,8 +18,8 @@ public class Obstacle : MonoBehaviour {
     private float torqueMagnitude;
 
     private void Awake() {
-        forceMagnitude = UnityEngine.Random.Range(-3f, 3f);
-        torqueMagnitude = UnityEngine.Random.Range(-2f, 2f);
+        forceMagnitude = UnityEngine.Random.Range(-4.5f, 4.5f);
+        torqueMagnitude = UnityEngine.Random.Range(-1.5f, 1.5f);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -58,14 +56,14 @@ public class Obstacle : MonoBehaviour {
     }
 
     public void ApplyForce() {
-        if (obstacleVisual.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody)) {
-            rigidbody.AddForce(new Vector3(UnityEngine.Random.Range(0f, 1f), 0, UnityEngine.Random.Range(0f, 1f)) * forceMagnitude, ForceMode.Impulse);
+        if (gameObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody)) {
+            rigidbody.AddForce(new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f)) * forceMagnitude, ForceMode.Impulse);
         }
     }
 
     public void ApplyTorque() {
-        if (obstacleVisual.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody)) {
-            rigidbody.AddTorque(rigidbody.transform.up * torqueMagnitude, ForceMode.Impulse);
+        if (gameObject.TryGetComponent<Rigidbody>(out Rigidbody rigidbody)) {
+            rigidbody.AddTorque(new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)) * torqueMagnitude, ForceMode.Impulse);
         }
     }
 }

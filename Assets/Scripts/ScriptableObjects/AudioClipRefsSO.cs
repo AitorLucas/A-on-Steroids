@@ -6,6 +6,8 @@ using UnityEngine;
 public class AudioClipRefsSO : ScriptableObject {
     
     public AudioClip[] shot;
-    public AudioClip[] background;
+    public AudioClip[] shipMoving;
+    public AudioClip[] shipExplosion;
+    public AudioClip[] powerUp;
     
 }

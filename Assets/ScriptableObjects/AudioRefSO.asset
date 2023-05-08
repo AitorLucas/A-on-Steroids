@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shot:
   - {fileID: 8300000, guid: 9000182728ec3d248a1b2899c8b59d2a, type: 3}
-  background:
-  - {fileID: 8300000, guid: 7d2772b58c43a1b48825e949567fb9f6, type: 3}
+  shipMoving:
+  - {fileID: 8300000, guid: 1802429ed9e47234db39dde850c8259e, type: 3}
+  shipExplosion:
+  - {fileID: 8300000, guid: 780ddacc1a613054780624da49f33b54, type: 3}
+  powerUp:
+  - {fileID: 8300000, guid: b11d14b498402dc4b814ec0ac7a88d5d, type: 3}
