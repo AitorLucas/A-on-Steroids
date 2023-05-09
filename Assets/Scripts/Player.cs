@@ -51,6 +51,7 @@ public class Player : MonoBehaviour {
     private float maxLife = 500;
 
     private Rigidbody playerRigidbody;
+    public bool isCrashed = false;
 
     private void Awake() {
         Instance = this;
@@ -70,11 +71,19 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
+        if (isCrashed) {
+            return;
+        }
+
         HandleMovement();
         HandlePowerUp();
     }
 
     private void OnCollisionEnter(Collision other) {
+        if (isCrashed) {
+            return;
+        }
+
         if (other.transform.TryGetComponent(out Obstacle obstacle)) {
             if (isPowerUpActive) {
                 if (powerUpType == PowerUpType.Invincibility) {
@@ -93,6 +102,10 @@ public class Player : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        if (isCrashed) {
+            return;
+        }
+
         if (other.transform.TryGetComponent(out PowerUp powerUp)) {
             OnPowerUpCatched?.Invoke(this, EventArgs.Empty);
 
@@ -122,6 +135,10 @@ public class Player : MonoBehaviour {
     }
 
     private void InputManager_OnShotFireAction(object sender, EventArgs e) {
+        if (isCrashed) {
+            return;
+        }
+
         if (canFire && Time.time >= nextFireTime) {
             nextFireTime = Time.time + fireRate;
             StartCoroutine(FireBurst());
@@ -237,6 +254,10 @@ public class Player : MonoBehaviour {
     }
 
     private void HandlePowerUp() {
+        if (isCrashed) {
+            return;
+        }
+
         if (isPowerUpActive) {
             powerUpTimer -= Time.deltaTime;
 
@@ -250,6 +271,10 @@ public class Player : MonoBehaviour {
     }
 
     private void AddDamage(float damage) {
+        if (isCrashed) {
+            return;
+        }
+
         currentLife -= damage;
 
         OnPlayerLifeChanged?.Invoke(this, new OnPlayerLifeChangedArgs {
@@ -259,11 +284,16 @@ public class Player : MonoBehaviour {
         if (currentLife <= 0) {
             explosionParticles.Play();
 
+            isCrashed = true;
             OnPlayerCrash?.Invoke(this, EventArgs.Empty);
         }
     }
 
     private void AddLife(float life) {
+        if (isCrashed) {
+            return;
+        }
+
         currentLife += life;
 
         if (currentLife > maxLife) {

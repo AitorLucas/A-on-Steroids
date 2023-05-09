@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameCanvasUI : MonoBehaviour {
+public class GameUI : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Image lifeBarImage;

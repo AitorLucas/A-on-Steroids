@@ -36,7 +36,7 @@ public class SoundManager : MonoBehaviour {
             movingTimer = movingTimerMax;
 
             if (player.isMoving) {
-                PlaySound(audioClipRefsSO.shipMoving, player.transform.position, 0.05f);
+                PlaySound(audioClipRefsSO.shipMoving, player.transform.position, 0.03f);
             }
         }
     }

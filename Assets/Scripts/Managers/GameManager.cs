@@ -24,13 +24,18 @@ public class GameManager : MonoBehaviour {
     private int maxObstacleSpawned = 60;
     private float powerUpSpawnInterval = 10f;
     private float powerUpTime = 0f;
+    public bool isGameOver = false;
+
+    private Player player;
 
     private void Awake() {
         Instance = this;
     }
 
     private void Start() {
-        Vector3 playerPosition = Player.Instance.transform.position;
+        player = Player.Instance;
+
+        Vector3 playerPosition = player.transform.position;
         SpawnObstacles();
 
         for (int index = 0; index < GetObstacleSpawned(); index ++) {
@@ -45,6 +50,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (IsGameOver()) {
+            return;
+        }
+
         RemoveFarObstacles();
         SpawnPowerUp();
     }
@@ -84,8 +93,6 @@ public class GameManager : MonoBehaviour {
              // - Calc a range around player subtracting a span near it.
         Vector3 spawnPosition = GetValidPositionToSpawn();
 
-        // TODO: - ADD A BETTER RANDOMIZER
-
         // - Spawn new PowerUp
         PowerUpSO newPowerUpSO = powerUpSOArray[UnityEngine.Random.Range(0, obstacleSOArray.Length)];
         PowerUp newPowerUp = Instantiate<PowerUp>(newPowerUpSO.powerUp, spawnPosition, Quaternion.identity);
@@ -102,7 +109,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private Vector3 GetValidPositionToSpawn() {
-        Vector3 playerPosition = Player.Instance.transform.position;
+        Vector3 playerPosition = player.transform.position;
 
         float radius = UnityEngine.Random.Range(minRenderDistance, maxRenderDistance);
         float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
@@ -113,7 +120,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void RemoveFarObstacles() {
-        Vector3 playerPosition = Player.Instance.transform.position;
+        Vector3 playerPosition = player.transform.position;
 
         for (int index = 0; index < GetObstacleSpawned(); index ++) {
             Obstacle obstacle = obstacleSpawnedList[index];
@@ -129,7 +136,15 @@ public class GameManager : MonoBehaviour {
         SpawnObstacles();      
     }
 
+    public bool IsGameOver() {
+        return player.isCrashed;
+    }
+
     private void Obstacle_OnObstacleDestroy(object sender, Obstacle.OnObstacleDestroyArgs e) {
+        if (IsGameOver()) {
+            return;
+        }
+
         Obstacle obstacle = sender as Obstacle;
         obstacleSpawnedList.Remove(obstacle);
 
@@ -141,6 +156,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void PowerUp_OnPowerUpDestroy(object sender, EventArgs e) {
+        if (IsGameOver()) {
+            return;
+        }
+
         PowerUp powerUp = sender as PowerUp;
         powerUpSpawned = null;
 
