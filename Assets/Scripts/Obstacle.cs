@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour {
-    [SerializeField] private ObstacleVisual obstacleOuterVisual;
+    [SerializeField] private GameObject obstacleOuterVisual;
 
     public event EventHandler<OnObstacleDestroyArgs> OnObstacleDestroy;
     public class OnObstacleDestroyArgs : EventArgs {

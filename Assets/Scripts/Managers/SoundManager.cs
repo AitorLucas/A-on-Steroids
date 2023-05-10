@@ -41,15 +41,13 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    public int number = 0; 
-
     // Sounds
     private void Player_OnShootFired(object sender, System.EventArgs e) {
         PlaySound(audioClipRefsSO.shot, player.transform.position);
     }
 
     private void Player_OnPlayerCrash(object sender, System.EventArgs e) {
-        PlaySound(audioClipRefsSO.shipExplosion[number], player.transform.position, volume = 1.2f);
+        PlaySound(audioClipRefsSO.shipExplosion, player.transform.position, volume = 1.2f);
     }
 
     private void Player_OnPowerUpCatched(object sender, System.EventArgs e) {

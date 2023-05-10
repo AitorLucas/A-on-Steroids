@@ -104,24 +104,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25fb1614ec76a941a846d873d07a4f3, type: 3}
---- !u!1 &131158765913890648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a25fb1614ec76a941a846d873d07a4f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 941412722094170633}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5199467852163890846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 131158765913890648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d67fd2c106593499f02e21dc88a52e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6940261361311534851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,12 +200,12 @@ PrefabInstance:
         type: 3}
       propertyPath: obstacleVisual
       value: 
-      objectReference: {fileID: 5199467852163890846}
+      objectReference: {fileID: 0}
     - target: {fileID: 8489538563546403339, guid: 30a2a8c46c88a9a4d80c448840cd40d6,
         type: 3}
       propertyPath: obstacleOuterVisual
       value: 
-      objectReference: {fileID: 333035821865357355}
+      objectReference: {fileID: 7298592585039713226}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30a2a8c46c88a9a4d80c448840cd40d6, type: 3}
 --- !u!4 &671834815958449218 stripped
@@ -378,15 +360,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7604511145593581211}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &333035821865357355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7298592585039713226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d67fd2c106593499f02e21dc88a52e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

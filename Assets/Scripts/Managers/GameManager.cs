@@ -90,21 +90,21 @@ public class GameManager : MonoBehaviour {
         if (powerUpTime >= powerUpSpawnInterval) {
             powerUpTime = 0;
 
-             // - Calc a range around player subtracting a span near it.
-        Vector3 spawnPosition = GetValidPositionToSpawn();
+            // - Calc a range around player subtracting a span near it.
+            Vector3 spawnPosition = GetValidPositionToSpawn();
 
-        // - Spawn new PowerUp
-        PowerUpSO newPowerUpSO = powerUpSOArray[UnityEngine.Random.Range(0, obstacleSOArray.Length)];
-        PowerUp newPowerUp = Instantiate<PowerUp>(newPowerUpSO.powerUp, spawnPosition, Quaternion.identity);
+            // - Spawn new PowerUp
+            PowerUpSO newPowerUpSO = powerUpSOArray[UnityEngine.Random.Range(0, obstacleSOArray.Length)];
+            PowerUp newPowerUp = Instantiate<PowerUp>(newPowerUpSO.powerUp, spawnPosition, Quaternion.identity);
 
-        // - Attribute PowerUp type variant
-        newPowerUp.DefinePowerUpType(newPowerUpSO.powerUpType);
+            // - Attribute PowerUp type variant
+            newPowerUp.DefinePowerUpType(newPowerUpSO.powerUpType);
 
-        // - Observe PowerUp event
-        newPowerUp.OnPowerUpDestroy += PowerUp_OnPowerUpDestroy;
+            // - Observe PowerUp event
+            newPowerUp.OnPowerUpDestroy += PowerUp_OnPowerUpDestroy;
 
-        // - Add to variable to validate distance afterwards
-        powerUpSpawned = newPowerUp;
+            // - Add to variable to validate distance afterwards
+            powerUpSpawned = newPowerUp;
         }
     }
 

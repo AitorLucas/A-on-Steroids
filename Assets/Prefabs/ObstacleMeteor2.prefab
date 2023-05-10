@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0a1cade8f3785a5498483caf954be128, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0a1cade8f3785a5498483caf954be128, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87,18 +87,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1239602523842418332}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8153310448892432535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239602523842515004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d67fd2c106593499f02e21dc88a52e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4936502319215245147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,24 +160,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a1cade8f3785a5498483caf954be128, type: 3}
---- !u!1 &4936502319215211003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 0a1cade8f3785a5498483caf954be128,
-    type: 3}
-  m_PrefabInstance: {fileID: 4936502319215245147}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &80777190536087919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4936502319215211003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d67fd2c106593499f02e21dc88a52e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6940261361311534851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286,12 +256,12 @@ PrefabInstance:
         type: 3}
       propertyPath: obstacleVisual
       value: 
-      objectReference: {fileID: 80777190536087919}
+      objectReference: {fileID: 0}
     - target: {fileID: 8489538563546403339, guid: 30a2a8c46c88a9a4d80c448840cd40d6,
         type: 3}
       propertyPath: obstacleOuterVisual
       value: 
-      objectReference: {fileID: 8153310448892432535}
+      objectReference: {fileID: 1239602523842515004}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30a2a8c46c88a9a4d80c448840cd40d6, type: 3}
 --- !u!4 &671834815958449218 stripped

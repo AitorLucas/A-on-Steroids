@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: b13109bc4674dd24ebc04b7c12437ad6, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7532f699e134c3547b373487f6b4d57f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029213836, g: 0.04262086, b: 0.031811815, a: 1}
+  m_IndirectSpecularColor: {r: 0.029476285, g: 0.04278432, b: 0.032096837, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -832,7 +832,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &590469747
 GameObject:
@@ -1091,7 +1091,7 @@ PrefabInstance:
     - target: {fileID: 2259333809139706969, guid: 1de69651fb40dda4a910ae57b273569a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2259333809139706969, guid: 1de69651fb40dda4a910ae57b273569a,
         type: 3}
@@ -1243,7 +1243,7 @@ RectTransform:
   - {fileID: 1222513873}
   - {fileID: 590469748}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1596,6 +1596,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04f2bc72d36eaf34ba38b19d040637a0, type: 2}
   - {fileID: 11400000, guid: 046dd1d054b83054bac50f0affd7bbc0, type: 2}
   - {fileID: 11400000, guid: f64061e6639e3444b86722c42e5b69d1, type: 2}
+  - {fileID: 11400000, guid: 930b0c305cae520488b81279761fe53b, type: 2}
   powerUpSOArray:
   - {fileID: 11400000, guid: cc45a5179fb7a064bbf742f3b2a39c1a, type: 2}
   - {fileID: 11400000, guid: e296dfe54516cee4aa76bc311aa7bb5c, type: 2}
@@ -2233,7 +2234,7 @@ RectTransform:
   - {fileID: 1179581742}
   - {fileID: 1525930312}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2381,7 +2382,7 @@ GameObject:
   - component: {fileID: 1677929526}
   - component: {fileID: 1677929525}
   m_Layer: 5
-  m_Name: Bg
+  m_Name: BackgroundGradient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2516,7 +2517,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClipRefsSO: {fileID: 11400000, guid: 9b4152dd0ace7b14894e5f91565742d9, type: 2}
-  number: 0
 --- !u!4 &1988313130
 Transform:
   m_ObjectHideFlags: 0
