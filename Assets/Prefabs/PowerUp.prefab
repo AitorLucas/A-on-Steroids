@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3368088692171285951}
   - component: {fileID: 1846719830764977974}
   - component: {fileID: 7194706544326580438}
-  - component: {fileID: 2525543818654625448}
   m_Layer: 0
   m_Name: OuterGlow
   m_TagString: Untagged
@@ -98,18 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2525543818654625448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720993836520156198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa827d7732b1d749b4389472516126c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7713007961201691363
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,8 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189be6be17f3ccf4a8cd3a51e2e65fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visual: {fileID: 0}
-  outerGlow: {fileID: 720993836520156198}
 --- !u!135 &217049558018081696
 SphereCollider:
   m_ObjectHideFlags: 0
