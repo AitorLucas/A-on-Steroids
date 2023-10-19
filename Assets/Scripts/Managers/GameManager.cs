@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
     private int maxObstacleSpawned = 60;
     private float powerUpSpawnInterval = 10f;
     private float powerUpTime = 0f;
-    public bool isGameOver = false;
 
     private Player player;
 
